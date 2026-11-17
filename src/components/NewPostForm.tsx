@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAppStore } from '../store/useAppStore';
 
-export function NewPostForm() {
+export function NewPostForm({ onSaved }: { onSaved?: () => void }) {
     const { selectedUser, addPost } = useAppStore();
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
@@ -28,32 +28,35 @@ export function NewPostForm() {
         setTitle('');
         setBody('');
         setErrors({});
+        onSaved?.();
     };
 
     if (!selectedUser) return null;
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h3>Nueva publicación</h3>
-            <div>
-                <label>Título</label>
+        <form onSubmit={handleSubmit} style={{ maxWidth: 420, margin: '0 auto' }}>
+            <h3 style={{ textAlign: 'center' }}>Nueva publicación</h3>
+            <div style={{ display: 'flex', flexDirection: 'column'}}>
+                <label style={{ display: 'block' }}>Título</label>
                 <input
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     aria-invalid={!!errors.title}
+                    style={{ width: '100%', boxSizing: 'border-box' }}
                 />
                 {errors.title && <span role="alert">{errors.title}</span>}
             </div>
-            <div>
-                <label>Texto</label>
+            <div style={{ display: 'flex', flexDirection: 'column'}}>
+                <label style={{ display: 'block' }}>Texto</label>
                 <textarea
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
                     aria-invalid={!!errors.body}
+                    style={{ width: '100%', boxSizing: 'border-box' }}
                 />
                 {errors.body && <span role="alert">{errors.body}</span>}
             </div>
-            <button type="submit">Publicar</button>
+            <button type="submit" style={{ display: 'block', margin: '10px auto' }}>Publicar</button>
         </form>
     );
 }

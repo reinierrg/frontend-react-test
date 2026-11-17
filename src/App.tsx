@@ -1,5 +1,4 @@
 import './App.css'
-import { NewPostForm } from './components/NewPostForm';
 import { PostList } from './components/PostsList';
 import { UserList } from './components/UserList';
 import { useAppStore } from './store/useAppStore';
@@ -22,8 +21,7 @@ function App() {
         </div>
         {selectedUser && (
           <div style={{ flex: '1 1 0', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <PostList />
-            <NewPostForm />
+            <PostList key={selectedUser.id} />
           </div>
         )}
       </div>
