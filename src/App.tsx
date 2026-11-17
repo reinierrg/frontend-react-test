@@ -4,7 +4,7 @@ import { UserList } from './components/UserList';
 import { useAppStore } from './store/useAppStore';
 
 function App() {
-  const {selectUser, error, clearError } = useAppStore();
+  const { selectedUser, error, clearError } = useAppStore();
 
   return (
     <div style={{ maxWidth: 800, margin: '0 auto', padding: 20, display: 'flex', flexDirection:'column'}}>
@@ -16,7 +16,7 @@ function App() {
         </div>
       )}
       <UserList />
-      {selectUser && (
+      {selectedUser && (
           <PostList />
       )}
       

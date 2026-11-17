@@ -2,14 +2,14 @@ import { useEffect } from 'react';
 import { useAppStore } from '../store/useAppStore';
 
 export function PostList() {
-  const { selectedUser, posts, loading, error, fetchPosts } = useAppStore();
+  const { selectedUser, posts, postsLoading, error, fetchPosts } = useAppStore();
 
   useEffect(() => {
     if (selectedUser) fetchPosts(selectedUser.id);
   }, [selectedUser, fetchPosts]);
 
   if (!selectedUser) return <p>Selecciona un usuario</p>;
-  if (loading) return <p role="status">Cargando publicaciones...</p>;
+  if (postsLoading) return <p role="status">Cargando publicaciones...</p>;
   if (error) return <p role="alert">Error: {error}</p>;
 
   return (

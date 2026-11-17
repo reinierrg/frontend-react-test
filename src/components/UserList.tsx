@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAppStore } from '../store/useAppStore';
 
 export function UserList() {
-  const { users, searchTerm, loading, error, fetchUsers, selectUser } = useAppStore();
+  const { users, searchTerm, usersLoading, error, fetchUsers, selectUser } = useAppStore();
 
   useEffect(() => {
     fetchUsers();
@@ -12,8 +12,8 @@ export function UserList() {
     u.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  if (loading) return <p role="status">Cargando usuarios...</p>;
-  if (error) return <p role="alert">Error: {error}</p>;
+  if (usersLoading) return <p role="status">Cargando usuarios...</p>;
+  if (error && users.length === 0) return <p role="alert">Error: {error}</p>;
 
   return (
     <div>

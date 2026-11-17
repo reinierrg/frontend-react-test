@@ -7,7 +7,8 @@ interface AppState {
   selectedUser: User | null;
   posts: Post[];
   searchTerm: string;
-  loading: boolean;
+  usersLoading: boolean;
+  postsLoading: boolean;
   error: string | null;
 
   fetchUsers: () => Promise<void>;
@@ -23,26 +24,27 @@ export const useAppStore = create<AppState>((set) => ({
   selectedUser: null,
   posts: [],
   searchTerm: '',
-  loading: false,
+  usersLoading: false,
+  postsLoading: false,
   error: null,
 
   fetchUsers: async () => {
-    set({ loading: true, error: null });
+    set({ usersLoading: true, error: null });
     try {
       const { data } = await getUsers();
-      set({ users: data, loading: false });
-    } catch (err) {
-      set({ error: 'Error al cargar usuarios', loading: false });
+      set({ users: data, usersLoading: false });
+    } catch {
+      set({ error: 'Error al cargar usuarios', usersLoading: false });
     }
   },
 
   fetchPosts: async (userId) => {
-    set({ loading: true, error: null });
+    set({ postsLoading: true, error: null });
     try {
       const { data } = await getPostsByUser(userId);
-      set({ posts: data, loading: false });
-    } catch (err) {
-      set({ error: 'Error al cargar publicaciones', loading: false });
+      set({ posts: data, postsLoading: false });
+    } catch {
+      set({ error: 'Error al cargar publicaciones', postsLoading: false });
     }
   },
 
