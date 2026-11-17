@@ -1,75 +1,41 @@
-# React + TypeScript + Vite
+# Prueba técnica — Frontend React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+App con React, TypeScript y Vite que consume la API pública de [JSONPlaceholder](https://jsonplaceholder.typicode.com): listado de usuarios con búsqueda, publicaciones por usuario y alta de publicaciones con formulario validado.
 
-Currently, two official plugins are available:
+## Cómo ejecutarlo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Requiere Node 20+ y pnpm.
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+pnpm install
+pnpm dev      # http://localhost:5173
+pnpm test     # Vitest + Testing Library
+pnpm build    # tsc -b && vite build
+pnpm lint
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+No hay variables de entorno: la API está definida en `src/services/endpoints.ts`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Decisiones
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Zustand en vez de Context o Redux.** El estado lo comparten la lista, el panel de publicaciones y el formulario. Con Context arrastraba re-renders de todo el árbol y Redux es para proyectos mas robustos. 
 
-```
+- **Tests con la API mockeada.** Los tests no dependen de la red ni de datos remotos que pueden cambiar.
+
+## Qué haría con más tiempo
+
+- Usaria una libreria de componentes como shadcn para mejorar la interface
+- Usaria para la gestion de formulario react hook form
+- CI con `lint` + `test` + `build` en cada push.
+- Prepararia la interface para la paginacion de una lista mayor de usuario y post
+
+## Cómo usé la IA
+
+### Qué le pedí
+
+Revise algunos detalles del diseño y le pedi que me implemetara los test.
+
+
+
+
+
