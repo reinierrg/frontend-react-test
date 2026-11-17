@@ -18,7 +18,7 @@ export function UserList() {
   if (error && users.length === 0) return <p role="alert">Error: {error}</p>;
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <UserSearch/>
       <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
         {filteredUsers.map((user) => {
