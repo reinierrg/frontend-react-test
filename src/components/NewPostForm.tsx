@@ -37,8 +37,9 @@ export function NewPostForm({ onSaved }: { onSaved?: () => void }) {
         <form onSubmit={handleSubmit} style={{ maxWidth: 420, margin: '0 auto' }}>
             <h3 style={{ textAlign: 'center' }}>Nueva publicación</h3>
             <div style={{ display: 'flex', flexDirection: 'column'}}>
-                <label style={{ display: 'block' }}>Título</label>
+                <label htmlFor="post-title" style={{ display: 'block' }}>Título</label>
                 <input
+                    id="post-title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     aria-invalid={!!errors.title}
@@ -47,8 +48,9 @@ export function NewPostForm({ onSaved }: { onSaved?: () => void }) {
                 {errors.title && <span role="alert">{errors.title}</span>}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column'}}>
-                <label style={{ display: 'block' }}>Texto</label>
+                <label htmlFor="post-body" style={{ display: 'block' }}>Texto</label>
                 <textarea
+                    id="post-body"
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
                     aria-invalid={!!errors.body}
