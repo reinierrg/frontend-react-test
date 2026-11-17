@@ -1,4 +1,5 @@
 import './App.css'
+import { NewPostForm } from './components/NewPostForm';
 import { PostList } from './components/PostsList';
 import { UserList } from './components/UserList';
 import { useAppStore } from './store/useAppStore';
@@ -7,7 +8,7 @@ function App() {
   const { selectedUser, error, clearError } = useAppStore();
 
   return (
-    <div style={{ maxWidth: 800, margin: '0 auto', padding: 20, display: 'flex', flexDirection:'column'}}>
+    <div style={{ maxWidth: 1000, margin: '0 auto', padding: 20, display: 'flex', flexDirection:'column'}}>
       <h1>Lista de usuarios</h1>
 
       {error && (
@@ -15,10 +16,17 @@ function App() {
           {error} <button onClick={clearError}>Cerrar</button>
         </div>
       )}
-      <UserList />
-      {selectedUser && (
-          <PostList />
-      )}
+      <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start' }}>
+        <div style={{ flex: '0 0 320px' }}>
+          <UserList />
+        </div>
+        {selectedUser && (
+          <div style={{ flex: '1 1 0', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <PostList />
+            <NewPostForm />
+          </div>
+        )}
+      </div>
       
       
     </div>

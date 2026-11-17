@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useAppStore } from '../store/useAppStore';
+import { UserSearch } from './UserSearch';
 
 export function UserList() {
   const { users, searchTerm, usersLoading, error, fetchUsers, selectUser } = useAppStore();
@@ -17,6 +18,7 @@ export function UserList() {
 
   return (
     <div>
+      <UserSearch/>
       <ul>
         {filteredUsers.map((user) => (
           <li key={user.id}>

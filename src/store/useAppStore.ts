@@ -48,7 +48,8 @@ export const useAppStore = create<AppState>((set) => ({
     }
   },
 
-  setSearchTerm: (term) => set({ searchTerm: term }),
+  setSearchTerm: (term) =>
+    set({ searchTerm: term, selectedUser: null, posts: [] }),
   selectUser: (user) => set({ selectedUser: user, posts: [] }),
   addPost: (post) => set((state) => ({ posts: [post, ...state.posts] })),
   clearError: () => set({ error: null }),
